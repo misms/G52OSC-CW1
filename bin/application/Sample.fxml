@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.collections.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -11,39 +12,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
-      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Label layoutX="14.0" layoutY="47.0" text="Enter Cylinder Size" />
-      <Label layoutX="212.0" layoutY="47.0" text="Enter Current Head Position" />
-      <Label layoutX="15.0" layoutY="127.0" text="Enter Number of Requests" />
-      <Label layoutX="212.0" layoutY="118.0" text="Enter Request&#10;(use comma to separate requests)" />
-      <TextField fx:id="cylinder_size" layoutX="12.0" layoutY="64.0" />
-      <TextField fx:id="current_pos" layoutX="212.0" layoutY="64.0" />
-      <TextField fx:id="num_request" layoutX="14.0" layoutY="153.0" />
-      <TextField fx:id="request" layoutX="215.0" layoutY="153.0" />
-      <ComboBox fx:id="algobox" layoutX="14.0" layoutY="215.0" prefWidth="150.0" promptText="Choose ..." />
-      <Label layoutX="13.0" layoutY="198.0" text="Select Disk Algorithm" />
-      <Label layoutX="15.0" layoutY="310.0" text="Total Head Movement" />
-      <Label layoutX="15.0" layoutY="258.0" text="FCFS Algorithm request in order " />
-      <Button fx:id="simulate_button" layoutX="215.0" layoutY="215.0" mnemonicParsing="false" onAction="#simulate" text="Simulate" />
+      <SplitPane dividerPositions="0.6115107913669064" orientation="VERTICAL" prefHeight="700.0" prefWidth="470.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <GridPane layoutX="32.0" layoutY="18.0" prefHeight="342.0" prefWidth="400.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="232.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="0.0" prefWidth="168.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Enter Cylinder Size" />
+                         <TextField fx:id="cylinder_size" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
+                        <TextField fx:id="current_pos" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Enter Current Head Position" GridPane.rowIndex="1" />
+                        <TextField fx:id="num_request" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Enter Number of Requests" GridPane.rowIndex="2" />
+                        <TextField fx:id="request" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Enter Request&#10;(use comma to separate requests)" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="algobox" prefWidth="150.0" promptText="Choose ..." style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Select Disk Algorithm" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="simulate_button" layoutX="196.0" layoutY="380.0" mnemonicParsing="false" onAction="#simulate" style="-fx-background-radius: 10;" text="Simulate" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="396.0" prefWidth="0.0">
+               <children>
+                  <Label layoutX="33.0" layoutY="98.0"  text="Total Head Movement" />
+                  <Label layoutX="33.0" layoutY="20.0" text="FCFS Algorithm request in order : " />
+                  <Text fx:id="request_result" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Variables and press simulate" />
+                  <Text fx:id="movement_result" layoutX="55.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Variables and press simulate" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>
