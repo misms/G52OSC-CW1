@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
@@ -8,8 +9,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
       <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -31,17 +33,17 @@
         </menus>
       </MenuBar>
       <Label layoutX="14.0" layoutY="47.0" text="Enter Cylinder Size" />
-      <Label layoutX="15.0" layoutY="104.0" text="Enter Current Head Position" />
-      <Label layoutX="15.0" layoutY="166.0" text="Enter Number of Requests" />
-      <Label layoutX="15.0" layoutY="228.0" text="Enter Request (use comma to separate requests)" />
-      <TextField layoutX="12.0" layoutY="64.0" />
-      <TextField layoutX="12.0" layoutY="121.0" />
-      <TextField layoutX="13.0" layoutY="183.0" />
-      <TextField layoutX="12.0" layoutY="245.0" />
-      <ComboBox layoutX="13.0" layoutY="306.0" prefWidth="150.0" promptText="Choose ..." />
-      <Label layoutX="13.0" layoutY="289.0" text="Select Disk Algorithm" />
-      <Label layoutX="11.0" layoutY="469.0" text="Total Head Movement" />
-      <Label layoutX="11.0" layoutY="403.0" text="FCFS Algorithm request in order " />
-      <Button fx:id="simulate_button" layoutX="155.0" layoutY="359.0" mnemonicParsing="false" text="Simulate" />
+      <Label layoutX="212.0" layoutY="47.0" text="Enter Current Head Position" />
+      <Label layoutX="15.0" layoutY="127.0" text="Enter Number of Requests" />
+      <Label layoutX="212.0" layoutY="118.0" text="Enter Request&#10;(use comma to separate requests)" />
+      <TextField fx:id="cylinder_size" layoutX="12.0" layoutY="64.0" />
+      <TextField fx:id="current_pos" layoutX="212.0" layoutY="64.0" />
+      <TextField fx:id="num_request" layoutX="14.0" layoutY="153.0" />
+      <TextField fx:id="request" layoutX="215.0" layoutY="153.0" />
+      <ComboBox fx:id="algobox" layoutX="14.0" layoutY="215.0" prefWidth="150.0" promptText="Choose ..." />
+      <Label layoutX="13.0" layoutY="198.0" text="Select Disk Algorithm" />
+      <Label layoutX="15.0" layoutY="310.0" text="Total Head Movement" />
+      <Label layoutX="15.0" layoutY="258.0" text="FCFS Algorithm request in order " />
+      <Button fx:id="simulate_button" layoutX="215.0" layoutY="215.0" mnemonicParsing="false" onAction="#simulate" text="Simulate" />
    </children>
 </AnchorPane>
