@@ -9,15 +9,11 @@ public abstract class Result {
 
     @FXML
     Text request_result = new Text();
-
     @FXML
     Text movement_result = new Text();
 
     void set(int[] request, int movement){
-        String result = Arrays.toString(request);
-
-        request_result.setText(String.valueOf(result));
-
+        request_result.setText(Arrays.toString(request));
         movement_result.setText(String.valueOf(movement));
     }
 }
