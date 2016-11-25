@@ -1,13 +1,11 @@
 package application;
 
 public abstract class FCFS extends SSTF{
-	//Test this cases
-	//TEST case Cylinder size = 200 / {23,89,132,42,187} Start = 100 / Total = 421
-	int count;
 	/**
 	 * @param disk this is the disk object created in Disk class with 4 other variables (startPos, numberOfRequest, request [ARRAY], and cylinder_size)
 	 */
 	void fcfs(Disk disk){
+		int count = 0;
 		System.out.println("FCFS Scheduling in the order that follows: ");
 		int head = disk.startPos;
 		for(int i = 0 ; i < disk.numberOfRequest ; i++){
