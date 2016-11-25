@@ -7,14 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import java.util.StringTokenizer;
-import javax.swing.text.DocumentFilter;
 
 
-public class Controller extends Algorithms implements Initializable {
+public class Controller extends FCFS implements Initializable {
 
     //Combo Box -> Algorithms
 	private ObservableList<String> algorithm_list = FXCollections.observableArrayList("FCFS","SSTF","SCAN","CSCAN","LOOK","CLOOK");
@@ -72,16 +70,20 @@ public class Controller extends Algorithms implements Initializable {
 			sstf(disk);
 
 		if(algobox.getValue() == "SCAN")
-			sel = 3;
+			sel = 0;
+			//scan(disk);
 
 		if(algobox.getValue() == "CSCAN")
-			sel = 4;
+			sel = 0;
+			//cscan(disk);
 
 		if(algobox.getValue() == "LOOK")
-			sel = 5;
+			sel = 0;
+			//look(disk);
 
 		if(algobox.getValue() == "CLOOK")
-			sel = 6;
+			sel = 0;
+			//clook(disk);
 	}
 
 

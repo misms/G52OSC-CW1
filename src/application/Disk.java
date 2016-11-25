@@ -1,17 +1,10 @@
 package application;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-
-import java.lang.reflect.InvocationTargetException;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-
-import javax.security.auth.login.Configuration;
 
 public class Disk extends Application {
 
@@ -19,9 +12,6 @@ public class Disk extends Application {
     int startPos;
     int numberOfRequest;
     int[] request;
-
-    @FXML
-    Button simulate_button = new Button();
 
     public Disk(){
     }
@@ -52,8 +42,6 @@ public class Disk extends Application {
             primaryStage.show();
     }
 
-
-	
 	public static void main(String[] args)
     {
 		launch(args);
