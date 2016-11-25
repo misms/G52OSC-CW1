@@ -70,8 +70,7 @@ public class Controller extends FCFS implements Initializable {
 			sstf(disk);
 
 		if(algobox.getValue() == "SCAN")
-			sel = 0;
-			//scan(disk);
+			scan(disk);
 
 		if(algobox.getValue() == "CSCAN")
 			sel = 0;
