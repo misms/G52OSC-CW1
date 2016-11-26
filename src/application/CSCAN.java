@@ -33,6 +33,7 @@ public abstract class CSCAN extends Result{
 	else{
 	count = ((disk.cylinder-1) - disk.startPos) + result[headLocation-1];
 	}
-	set(result,count);
+	disk.request = result;
+	set(disk.request,count);
 	}
 }

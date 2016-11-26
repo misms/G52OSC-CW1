@@ -4,7 +4,9 @@ public abstract class SSTF extends SCAN{
 
 
     public void sstf(Disk disk){
-        set(path(disk),serviceRequests(disk));
+        disk.request = path(disk);
+        int count = serviceRequests(disk);
+        set(disk.request,count);
     }
     
 

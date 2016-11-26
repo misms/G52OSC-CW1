@@ -34,12 +34,17 @@ public class Disk extends Application {
     //Set scene size and title
     @Override
     public void start(Stage primaryStage) throws Exception {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
-            Scene scene = new Scene(root, 470, 700);
+            Scene scene = new Scene(root, 1000, 600);
             scene.getStylesheets().add("/application/application.css");
             primaryStage.setTitle("Disk Scheduling");
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 	public static void main(String[] args)

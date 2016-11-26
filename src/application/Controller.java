@@ -1,12 +1,16 @@
 package application;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import java.util.StringTokenizer;
@@ -14,9 +18,10 @@ import java.util.StringTokenizer;
 
 public class Controller extends FCFS implements Initializable {
 
+	final String[] algorithms = {"FCFS","SSTF","SCAN","CSCAN","LOOK","CLOOK"};
     //Combo Box -> Algorithms
 	private ObservableList<String> algorithm_list = FXCollections.observableArrayList("FCFS","SSTF","SCAN","CSCAN","LOOK","CLOOK");
-
+	int sel = 0;
 
     @FXML
     TextField current_pos = new TextField();
@@ -27,7 +32,9 @@ public class Controller extends FCFS implements Initializable {
     @FXML
     TextField request = new TextField();
 	@FXML
-	private ComboBox algobox = new ComboBox();
+	ComboBox algobox = new ComboBox();
+	@FXML
+	LineChart<String,Number> lineChart;
 
 	/**
      * Set requestARRAY size
@@ -39,7 +46,7 @@ public class Controller extends FCFS implements Initializable {
      */
 
 	@FXML
-	public void simulate() throws IOException {
+	public void simulate() throws IOException, NumberFormatException {
         int x = 0;
 
 		try {
@@ -54,41 +61,61 @@ public class Controller extends FCFS implements Initializable {
 					Integer.parseInt(num_request.getText()),
 					requestARRAY);
 			select_algorithms(disk1);
+			graphing(disk1);
 		}catch(NumberFormatException e){
 			Alert.display("Alert","Please use integer and comma specified only!");
+		}catch(ArrayIndexOutOfBoundsException e){
+			Alert.display("Alert","Please increase number of request !\nIt does not match request list");
 		}
 	}
 
-
 	private void select_algorithms(Disk disk){
-		int sel = 0;
 
-        if(algobox.getValue() == "FCFS")
-		    fcfs(disk);
-
-		if(algobox.getValue() == "SSTF")
+        if(algobox.getValue() == "FCFS"){
+			sel = 1;
+			fcfs(disk);
+		}
+		if(algobox.getValue() == "SSTF"){
+			sel = 2;
 			sstf(disk);
-
-		if(algobox.getValue() == "SCAN")
+		}
+		if(algobox.getValue() == "SCAN"){
+			sel = 3;
 			scan(disk);
-
-		if(algobox.getValue() == "CSCAN")
-			sel = 0;
-			//cscan(disk);
-
-		if(algobox.getValue() == "LOOK")
-			sel = 0;
+		}
+		if(algobox.getValue() == "CSCAN"){
+			sel = 4;
+			cscan(disk);
+		}
+		if(algobox.getValue() == "LOOK"){
 			//look(disk);
-
-		if(algobox.getValue() == "CLOOK")
-			sel = 0;
+			sel = 5;
+		}
+		if(algobox.getValue() == "CLOOK"){
 			//clook(disk);
+			sel = 6;
+		}
+
+	}
+
+	private void graphing(Disk disk){
+		lineChart.getData().clear();
+		XYChart.Series<String,Number> series = new XYChart.Series <String,Number>();
+		for(int i = 0 ; i < disk.request.length ; i++){
+			series.getData().add(new XYChart.Data<String,Number>(Integer.toString(i),disk.request[i]));
+		}
+		for(int i = 0 ; i < algorithms.length ; i++){
+			if(algobox.getValue() == algorithms[i])
+				series.setName(algorithms[i]);
+		}
+		lineChart.getData().add(series);
+
 	}
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Initialize combo box with algorithms
-        algobox.setItems(algorithm_list);
+           algobox.setItems(algorithm_list);
 	}
 }
