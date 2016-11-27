@@ -1,31 +1,78 @@
 package application;
+import static java.util.Arrays.sort;
 
 public abstract class SCAN extends CSCAN {
 
     public void scan(Disk disk){
-        int temp;
-        int head = 50;
+        int headLocation = 0;
         int count = 0;
         int[] result = new int[disk.numberOfRequest+1];
+		for (int i = 0 ;i <disk.numberOfRequest ;++i ) {
+			result[i+1] = disk.request[i];
+		}
+		result[result.length-1] = disk.startPos;
+		if(disk.startPos < (disk.cylinder/2)){
+		result[0] = 0;
+		sort(result);
+		} else {
+			result[0] = disk.cylinder-1;
+			sort(result);
+		}
 
-        for(int i = 0 ; i < disk.numberOfRequest ; i++){
-            result[i] = disk.request[i];
-        }
+		for (int i = 0 ;i < result.length ;++i ) {
+			if(disk.startPos == result[i]){
+				headLocation = i;
+			}
+		
+		}
 
-        result[disk.numberOfRequest] = head;
+		int [] path = new int[result.length];
+		
+		int j = 0;
+		int last = 0;
+		
+		
+		/**
+		* PATH ARRANGEMENT
+		**/
 
-        for(int i = 0 ; i < result.length ; i++){
-            for(int j = 0 ; j < result.length ; j++){
-                if(result[i] < result[j]){
-                    temp = result[i];
-                    result[i] = result[j];
-                    result[j] = temp;
-                }
-            }
-        }
 
-        count = head + result[result.length-1];
-        disk.request = result;
+	if(disk.startPos < (disk.cylinder/2)){
+	
+	for(int i = headLocation; i >= 0; --i){
+			path[j] = result[i];
+			++j;
+			last = j;
+		}
+		j = last;
+		for (int i = headLocation+1 ;i < result.length ; ++i ) {
+			path[j] = result[i];
+			++j;
+		}
+	count = disk.startPos + ((disk.cylinder-1) - result[headLocation+1]);
+	}
+	else{
+		
+		for (int i :result ) {
+			System.out.print(i + " ");
+		}
+		
+		for(int i = headLocation; i < result.length; ++i){
+			
+			path[j] = result[i];
+			//System.out.println(path[j]);
+			++j;
+			last = j;
+		}
+		j = last;
+		for (int i = headLocation-1 ;i >= 0 ; --i ) {
+			path[j] = result[i];
+			++j;
+		}
+
+	count = ((disk.cylinder-1) - disk.startPos) + result[headLocation-1];
+	}
+        disk.request = path;
         set(disk.request,count);
     }
 
