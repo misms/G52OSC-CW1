@@ -17,8 +17,15 @@ public abstract class FCFS extends SSTF{
 				head = disk.request[i];
 				System.out.print(disk.request[i]+ " ");
 			}
-		if(checkZero(disk))
+		if( checkZero(disk))
 			count = 0;
+		
+		int[] result = new int[disk.numberOfRequest+1];
+		for(int i = 0; i < disk.numberOfRequest; ++i){
+			result[i+1] = disk.request[i];
+		}
+		result[0] = disk.startPos;
+		disk.request = result;
 		System.out.println("\nTotal Head Movement: "+count);
 		set(disk.request,count);
 	}

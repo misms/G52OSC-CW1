@@ -88,8 +88,8 @@ public class Controller extends FCFS implements Initializable {
 			cscan(disk);
 		}
 		if(algobox.getValue() == "LOOK"){
-			//look(disk);
 			sel = 5;
+			look(disk);
 		}
 		if(algobox.getValue() == "CLOOK"){
 			//clook(disk);

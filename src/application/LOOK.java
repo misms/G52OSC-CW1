@@ -1,23 +1,17 @@
 package application;
 import static java.util.Arrays.sort;
 
-public abstract class SCAN extends CSCAN {
+public abstract class LOOK extends Result {
 
-    public void scan(Disk disk){
+    public void look(Disk disk){
         int headLocation = 0;
         int count = 0;
-        int [] result = new int[disk.numberOfRequest+2];
+        int[] result = new int[disk.numberOfRequest+1];
 		for (int i = 0 ;i <disk.numberOfRequest ;++i ) {
-			result[i+1] = disk.request[i];
+			result[i + 1] = disk.request[i];
 		}
-		result[result.length-1] = disk.startPos;
-		if(disk.startPos < (disk.cylinder/2)){
-		result[0] = 0;
+		result[0] = disk.startPos;
 		sort(result);
-		} else {
-			result[0] = disk.cylinder-1;
-			sort(result);
-		}
 
 		for (int i = 0 ;i < result.length ;++i ) {
 			if(disk.startPos == result[i]){
@@ -49,9 +43,13 @@ public abstract class SCAN extends CSCAN {
 			path[j] = result[i];
 			++j;
 		}
-	count = disk.startPos + path[path.length-1];
+	count = (disk.startPos-result[0]) + (result[result.length-1]-result[0]);
 	}
 	else{
+		
+		for (int i :result ) {
+			System.out.print(i + " ");
+		}
 		
 		for(int i = headLocation; i < result.length; ++i){
 			
@@ -66,7 +64,7 @@ public abstract class SCAN extends CSCAN {
 			++j;
 		}
 
-	count = ((disk.cylinder-1) - disk.startPos) + (disk.cylinder-result[0]);
+	count = ((result[result.length-1] - disk.startPos) + (result[result.length-1]-result[0]));
 	}
         disk.request = path;
         set(disk.request,count);
