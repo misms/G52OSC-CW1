@@ -1,5 +1,8 @@
 package application;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.ProgressBar;
+
 public abstract class SSTF extends SCAN{
 
 
@@ -12,7 +15,7 @@ public abstract class SSTF extends SCAN{
         
         int count = serviceRequests(disk);
         disk.request = result;
-        set(disk.request,count);
+        set(disk,disk.request,count);
     }
     
 
