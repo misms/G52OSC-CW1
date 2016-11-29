@@ -6,7 +6,7 @@ public abstract class SSTF extends SCAN{
     public void sstf(Disk disk){
     	int[] result = new int[(path(disk)).length+1];
 		for(int i = 0; i < disk.numberOfRequest; ++i){
-			result[i+1] = path(disk)[i];
+			result[i + 1] = path(disk)[i];
 		}
 		result[0] = disk.startPos;
         

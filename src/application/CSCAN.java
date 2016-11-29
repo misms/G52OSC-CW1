@@ -10,7 +10,7 @@ public abstract class CSCAN extends LOOK {
 		int j = 0;
 		
 		for (int i = 0 ;i <disk.numberOfRequest ;++i ) {
-			result[i+3] = disk.request[i];
+			result[i + 3] = disk.request[i];
 		}
 		result[2] = disk.startPos;
 		result[1] = disk.cylinder-1;

@@ -8,7 +8,7 @@ public abstract class LOOK extends Result {
         int count = 0;
         int[] result = new int[disk.numberOfRequest+1];
 		for (int i = 0 ;i <disk.numberOfRequest ;++i ) {
-			result[i+1] = disk.request[i];
+			result[i + 1] = disk.request[i];
 		}
 		result[0] = disk.startPos;
 		sort(result);

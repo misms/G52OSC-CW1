@@ -6,7 +6,7 @@ public abstract class SCAN extends CSCAN {
     public void scan(Disk disk){
         int headLocation = 0;
         int count = 0;
-        int[] result = new int[disk.numberOfRequest+2];
+        int [] result = new int[disk.numberOfRequest+2];
 		for (int i = 0 ;i <disk.numberOfRequest ;++i ) {
 			result[i+1] = disk.request[i];
 		}

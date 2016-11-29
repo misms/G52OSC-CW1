@@ -17,7 +17,7 @@ public abstract class FCFS extends SSTF{
 				head = disk.request[i];
 				System.out.print(disk.request[i]+ " ");
 			}
-		if(checkZero(disk))
+		if( checkZero(disk))
 			count = 0;
 		
 		int[] result = new int[disk.numberOfRequest+1];
