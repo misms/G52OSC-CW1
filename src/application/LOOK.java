@@ -1,7 +1,7 @@
 package application;
 import static java.util.Arrays.sort;
 
-public abstract class LOOK extends Result {
+public abstract class LOOK extends CLOOK {
 
     public void look(Disk disk){
         int headLocation = 0;

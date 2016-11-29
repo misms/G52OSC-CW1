@@ -92,8 +92,9 @@ public class Controller extends FCFS implements Initializable {
 			look(disk);
 		}
 		if(algobox.getValue() == "CLOOK"){
-			//clook(disk);
 			sel = 6;
+			clook(disk);
+
 		}
 
 	}
