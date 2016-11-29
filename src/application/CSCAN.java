@@ -1,39 +1,61 @@
 package application;
 import static java.util.Arrays.sort;
 
-public abstract class CSCAN extends Result{
-	
-	public void cscan(Disk disk){
-	//int [] arr = {95,180,34,119,11,123,62,64};
-	//int cylinder = 200;
-	//int head = 50;
-	int count = 0;
-	int headLocation=0;
+public abstract class CSCAN extends LOOK {
 
-	int [] result = new int[disk.numberOfRequest+1];
-	for (int i = 0 ;i <disk.numberOfRequest ;++i ) {
-		result[i] = disk.request[i];
-	}
-
-	result[result.length-1] = disk.startPos;
-
-	
-	sort(result);
-
-	for (int i = 0 ;i < result.length ;++i ) {
-		if(disk.startPos == result[i]){
-			headLocation = i;
+    public void cscan(Disk disk){
+        int headLocation = 0;
+        int count = 0;
+        int[] result = new int[disk.numberOfRequest+3];
+		int j = 0;
+		
+		for (int i = 0 ;i <disk.numberOfRequest ;++i ) {
+			result[i+3] = disk.request[i];
 		}
-	
-	}
-	// if less than half of size then go left else go right
+		result[2] = disk.startPos;
+		result[1] = disk.cylinder-1;
+		result[0] = 0;
+		sort(result);
+		
+
+		for (int i = 0 ;i < result.length ;++i ) {
+			if(disk.startPos == result[i]){
+				headLocation = i;
+			}
+		
+		}
+
+		int [] path = new int[result.length];
+
+		
 	if(disk.startPos < (disk.cylinder/2)){
-	count = disk.startPos + (disk.cylinder-1 - result[headLocation+1]);
+		for(int i = headLocation ; i >= 0 ; i-- ){
+			path[j] = result[i];
+			j++;
+		}
+		j = path.length -1;
+		for(int i = headLocation + 1 ; i < path.length ; i++){
+			path[j] = result[i];
+			j--;
+		}
+		count = disk.startPos + (disk.cylinder-1 - result[headLocation+1]);	
 	}
-	else{
-	count = ((disk.cylinder-1) - disk.startPos) + result[headLocation-1];
+	
+	if(disk.startPos > (disk.cylinder/2)){
+		for(int i = headLocation ; i < result.length ; i++){
+			path[j] = result[i];
+			j++;
+		}
+		for(int i = 0 ; i < headLocation ; i++ ){
+			path[j] = result[i];
+			j++;
+		}
+		count = ((disk.cylinder-1) - disk.startPos) + result[headLocation-1];
 	}
-	disk.request = result;
-	set(disk.request,count);
-	}
+        disk.request = path;
+        set(disk.request,count);
+    }
+
+
+
 }
