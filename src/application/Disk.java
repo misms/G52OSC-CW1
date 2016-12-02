@@ -1,17 +1,10 @@
 package application;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-
-import java.lang.reflect.InvocationTargetException;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-
-import javax.security.auth.login.Configuration;
 
 public class Disk extends Application {
 
@@ -19,9 +12,6 @@ public class Disk extends Application {
     int startPos;
     int numberOfRequest;
     int[] request;
-
-    @FXML
-    Button simulate_button = new Button();
 
     public Disk(){
     }
@@ -44,19 +34,22 @@ public class Disk extends Application {
     //Set scene size and title
     @Override
     public void start(Stage primaryStage) throws Exception {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
-            Scene scene = new Scene(root, 470, 700);
+            Scene scene = new Scene(root, 1000, 600);
             scene.getStylesheets().add("/application/application.css");
             primaryStage.setTitle("Disk Scheduling");
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
-
-	
 	public static void main(String[] args)
     {
-		launch(args);
+        launch(args);
 	}
 
 

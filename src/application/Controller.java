@@ -1,24 +1,27 @@
 package application;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import java.util.StringTokenizer;
-import javax.swing.text.DocumentFilter;
 
 
-public class Controller extends Algorithms implements Initializable {
+public class Controller extends FCFS implements Initializable {
 
+	final String[] algorithms = {"FCFS","SSTF","SCAN","CSCAN","LOOK","CLOOK"};
     //Combo Box -> Algorithms
 	private ObservableList<String> algorithm_list = FXCollections.observableArrayList("FCFS","SSTF","SCAN","CSCAN","LOOK","CLOOK");
-
+	int sel = 0;
 
     @FXML
     TextField current_pos = new TextField();
@@ -29,7 +32,9 @@ public class Controller extends Algorithms implements Initializable {
     @FXML
     TextField request = new TextField();
 	@FXML
-	private ComboBox algobox = new ComboBox();
+	ComboBox algobox = new ComboBox();
+	@FXML
+	LineChart<String,Number> lineChart;
 
 	/**
      * Set requestARRAY size
@@ -41,7 +46,7 @@ public class Controller extends Algorithms implements Initializable {
      */
 
 	@FXML
-	public void simulate() throws IOException {
+	public void simulate() throws IOException, NumberFormatException {
         int x = 0;
 
 		try {
@@ -56,38 +61,67 @@ public class Controller extends Algorithms implements Initializable {
 					Integer.parseInt(num_request.getText()),
 					requestARRAY);
 			select_algorithms(disk1);
+			graphing(disk1);
 		}catch(NumberFormatException e){
 			Alert.display("Alert","Please use integer and comma specified only!");
+		}catch(ArrayIndexOutOfBoundsException e){
+			Alert.display("Alert","Please increase number of request !\nIt does not match request list");
 		}
 	}
 
+	private void select_algorithms(Disk disk) {
 
-	private void select_algorithms(Disk disk){
-		int sel = 0;
+        for (int i = 0; i < 6; i++) {
+            if (algobox.getValue() == algorithms[i]) {
+                sel = i + 1;
+            }
+        }
 
-        if(algobox.getValue() == "FCFS")
-		    fcfs(disk);
+        switch (sel) {
+            case 1:
+                fcfs(disk);
+                break;
 
-		if(algobox.getValue() == "SSTF")
-			sstf(disk);
+            case 2:
+                sstf(disk);
+                break;
 
-		if(algobox.getValue() == "SCAN")
-			sel = 3;
+            case 3:
+                scan(disk);
+                break;
 
-		if(algobox.getValue() == "CSCAN")
-			sel = 4;
+            case 4:
+                cscan(disk);
+                break;
 
-		if(algobox.getValue() == "LOOK")
-			sel = 5;
+            case 5:
+                look(disk);
+                break;
 
-		if(algobox.getValue() == "CLOOK")
-			sel = 6;
+            case 6:
+                //clook(disk);
+                break;
+        }
+    }
+
+	private void graphing(Disk disk){
+		lineChart.getData().clear();
+		XYChart.Series<String,Number> series = new XYChart.Series <String,Number>();
+		for(int i = 0 ; i < disk.request.length ; i++){
+			series.getData().add(new XYChart.Data<String,Number>(Integer.toString(i),disk.request[i]));
+		}
+		for(int i = 0 ; i < algorithms.length ; i++){
+			if(algobox.getValue() == algorithms[i])
+				series.setName(algorithms[i]);
+		}
+		lineChart.getData().add(series);
+
 	}
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Initialize combo box with algorithms
-        algobox.setItems(algorithm_list);
+           algobox.setItems(algorithm_list);
 	}
 }

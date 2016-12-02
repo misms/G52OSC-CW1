@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.collections.*?>
 <?import java.net.*?>
@@ -12,16 +13,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
-      <SplitPane dividerPositions="0.6115107913669064" orientation="VERTICAL" prefHeight="700.0" prefWidth="470.0">
+      <SplitPane dividerPositions="0.5" prefHeight="600.0" prefWidth="1000.0" SplitPane.resizableWithParent="false">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <GridPane layoutX="32.0" layoutY="18.0" prefHeight="342.0" prefWidth="400.0">
+                  <GridPane layoutX="24.0" prefHeight="342.0" prefWidth="458.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="232.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="0.0" prefWidth="168.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="274.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="0.0" prefWidth="184.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -43,15 +44,31 @@
                         <Label text="Select Disk Algorithm" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
-                  <Button fx:id="simulate_button" layoutX="196.0" layoutY="380.0" mnemonicParsing="false" onAction="#simulate" style="-fx-background-radius: 10;" text="Simulate" />
+                  <Button layoutX="189.0" layoutY="371.0" mnemonicParsing="false" onAction="#simulate" style="-fx-background-radius: 10;" text="Simulate" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="396.0" prefWidth="0.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="367.0">
                <children>
-                  <Label layoutX="33.0" layoutY="98.0"  text="Total Head Movement" />
-                  <Label layoutX="33.0" layoutY="20.0" text="FCFS Algorithm request in order : " />
-                  <Text fx:id="request_result" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Variables and press simulate" />
-                  <Text fx:id="movement_result" layoutX="55.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Variables and press simulate" />
+                  <VBox layoutX="28.0" layoutY="423.0" prefHeight="82.0" prefWidth="300.0" spacing="10.0">
+                     <children>
+                        <Label text="Algorithm request in order : " />
+                        <Text fx:id="request_result" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for simulation" textAlignment="CENTER" />
+                        <Label text="Total Head Movement :" />
+                        <Text fx:id="movement_result" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for simulation" textAlignment="CENTER" />
+                        <Label text="Disk Load:" />
+                        <ProgressBar fx:id="progress_bar" prefWidth="200.0" progress="0.0" />
+                     </children>
+                  </VBox>
+                  <LineChart fx:id="lineChart" layoutX="28.0" layoutY="39.0" prefHeight="363.0" prefWidth="429.0" title="Disk Scheduling Algorithm">
+                    <xAxis>
+                      <CategoryAxis side="TOP" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requests" />
+                  <Text fx:id="progress_percentage" layoutX="243.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
             </AnchorPane>
         </items>
