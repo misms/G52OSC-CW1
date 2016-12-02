@@ -67,7 +67,7 @@ public abstract class LOOK extends CLOOK {
 	count = ((result[result.length-1] - disk.startPos) + (result[result.length-1]-result[0]));
 	}
         disk.request = path;
-        set(disk.request,count);
+        set(disk,disk.request,count);
     }
 
 

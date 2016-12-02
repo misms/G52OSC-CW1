@@ -41,7 +41,7 @@ public abstract class CSCAN extends LOOK {
 		count = disk.startPos + (disk.cylinder-1 - result[headLocation+1]);	
 	}
 	
-	if(disk.startPos > (disk.cylinder/2)){
+	if(disk.startPos >= (disk.cylinder/2)){
 		for(int i = headLocation ; i < result.length ; i++){
 			path[j] = result[i];
 			j++;
@@ -53,7 +53,7 @@ public abstract class CSCAN extends LOOK {
 		count = ((disk.cylinder-1) - disk.startPos) + result[headLocation-1];
 	}
         disk.request = path;
-        set(disk.request,count);
+        set(disk,disk.request,count);
     }
 
 

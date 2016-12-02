@@ -69,7 +69,7 @@ public abstract class SCAN extends CSCAN {
 	count = ((disk.cylinder-1) - disk.startPos) + (disk.cylinder-result[0]);
 	}
         disk.request = path;
-        set(disk.request,count);
+        set(disk,disk.request,count);
     }
 
 

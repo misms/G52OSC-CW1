@@ -6,7 +6,6 @@ public abstract class FCFS extends SSTF{
 	 */
 	void fcfs(Disk disk){
 		int count = 0;
-		System.out.println("FCFS Scheduling in the order that follows: ");
 		int head = disk.startPos;
 		for(int i = 0 ; i < disk.numberOfRequest ; i++){
 				if(head > disk.request[i]){
@@ -15,7 +14,6 @@ public abstract class FCFS extends SSTF{
 					count += disk.request[i] - head;
 				}
 				head = disk.request[i];
-				System.out.print(disk.request[i]+ " ");
 			}
 		if( checkZero(disk))
 			count = 0;
@@ -26,8 +24,7 @@ public abstract class FCFS extends SSTF{
 		}
 		result[0] = disk.startPos;
 		disk.request = result;
-		System.out.println("\nTotal Head Movement: "+count);
-		set(disk.request,count);
+		set(disk,disk.request,count);
 	}
 
 

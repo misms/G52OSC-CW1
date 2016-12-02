@@ -39,7 +39,7 @@ public abstract class CLOOK extends Result {
 		count = (disk.startPos - result[0]) + (result[result.length-1] - result[headLocation+1]);	
 	}
 	
-	if(disk.startPos > (disk.cylinder/2)){
+	if(disk.startPos >= (disk.cylinder/2)){
 		for(int i = headLocation ; i < result.length ; i++){
 			path[j] = result[i];
 			j++;
@@ -51,7 +51,7 @@ public abstract class CLOOK extends Result {
 		count = (result[result.length-1] - disk.startPos) + (result[headLocation-1] - result[0]);
 	}
         disk.request = path;
-        set(disk.request,count);
+        set(disk,disk.request,count);
     }
 
 
